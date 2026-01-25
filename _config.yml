@@ -4,6 +4,7 @@ url: ''
 baseurl: ''
 markdown: kramdown
 permalink: pretty
+google_analytics: G-WS9FYF6T8N
 collections:
   prompts:
     output: true
