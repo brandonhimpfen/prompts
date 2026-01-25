@@ -1,0 +1,133 @@
+---
+layout: default
+---
+<section class="pageHead">
+  <div class="container">
+    {% assign catpage = site.prompt_categories | where: "key", page.category | first %}
+<div class="breadcrumbs">
+      <a href="/">Home</a> <span class="sep">/</span>
+      <a href="{{ '/categories/' | relative_url }}">Categories</a> <span class="sep">/</span>
+      <a href="{{ catpage.url }}">{{ page.category_title }}</a> <span class="sep">/</span>
+      {{ page.title }}
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="muted">{{ page.description }}</p>
+
+    <div class="metaChips">
+      <span class="metaChip">{{ page.category_title }}</span>
+      <span class="metaChip">{{ page.output_type | default: "Template" }}</span>
+      <span class="metaChip">{{ page.difficulty | default: "Beginner + Power" }}</span>
+      {% for t in page.tags limit:3 %}
+        <span class="metaChip">{{ t }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container promptLayout">
+    <div class="promptActions panelLite">
+      <div class="panelLite__head">
+        <div>
+          <div class="panelLite__title">Template</div>
+          <div class="panelLite__sub">Switch modes, then copy.</div>
+        </div>
+        <div class="seg" role="tablist" aria-label="Mode">
+          <button class="seg__btn is-active" data-mode="beginner" role="tab">Beginner</button>
+          <button class="seg__btn" data-mode="power" role="tab">Power User</button>
+        </div>
+      </div>
+
+      <div class="panelLite__body">
+        <div class="promptBtns">
+          <button id="copyTemplate" class="btn btn--primary">Copy template</button>
+          <a class="btn btn--ghost" href="{{ '/builder/?prompt=' | relative_url }}{{ page.key }}">Use in Builder</a>
+        </div>
+        <div id="promptToast" class="toast" role="status" aria-live="polite">Copied</div>
+
+        <div class="mini">
+          <div class="mini__k">What it’s for</div>
+          <div class="mini__v">Use this when you need “{{ page.output_type | default: "a result" }}” quickly without rewriting from scratch.</div>
+        </div>
+        <div class="mini">
+          <div class="mini__k">Works best when you include</div>
+          <div class="mini__v">Audience, goal, constraints, and the exact output format you want back.</div>
+        </div>
+        <div class="mini">
+          <div class="mini__k">Common mistakes</div>
+          <div class="mini__v">Vague instructions, missing context, or not specifying the format of the answer.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="promptMain">
+      <pre id="templateBox" class="code code--big"></pre>
+
+      <div class="section__head" style="margin-top:16px">
+        <h2>Examples</h2>
+        <p>Short, realistic examples to show how the template behaves.</p>
+      </div>
+
+      <div class="exampleGrid">
+        <div class="example panelLite">
+          <div class="panelLite__head"><div class="panelLite__title">Example input</div></div>
+          <div class="panelLite__body"><pre class="code">Context:
+[paste here]
+
+Goal:
+[what you want back]</pre></div>
+        </div>
+
+        <div class="example panelLite">
+          <div class="panelLite__head"><div class="panelLite__title">Example output</div></div>
+          <div class="panelLite__body"><pre class="code">Example output appears here.
+(Replace this with real examples later.)</pre></div>
+        </div>
+      </div>
+
+      <div class="section__head" style="margin-top:16px">
+        <h2>Variants</h2>
+        <p>Fast alternate versions you can copy.</p>
+      </div>
+
+      <div class="variants">
+        {% assign v1 = page.beginner | strip_newlines | slice: 0, 220 %}
+        <div class="variant">
+          <div class="variant__top">
+            <div class="variant__title">Short version</div>
+            <button class="btn btn--ghost btn--sm js-copy-variant" data-text="{{ page.beginner | strip_newlines | slice: 0, 220 | escape }}…">Copy</button>
+          </div>
+          <pre class="code">{{ v1 }}…</pre>
+        </div>
+
+        <div class="variant">
+          <div class="variant__top">
+            <div class="variant__title">Warmer tone</div>
+            <button class="btn btn--ghost btn--sm js-copy-variant" data-text="{{ page.beginner | append: '\n\nTone: warm, human, and respectful.' | escape }}">Copy</button>
+          </div>
+          <pre class="code">{{ page.beginner }}
+
+Tone: warm, human, and respectful.</pre>
+        </div>
+
+        <div class="variant">
+          <div class="variant__top">
+            <div class="variant__title">More direct</div>
+            <button class="btn btn--ghost btn--sm js-copy-variant" data-text="{{ page.beginner | append: '\n\nTone: direct and concise. Avoid hedging.' | escape }}">Copy</button>
+          </div>
+          <pre class="code">{{ page.beginner }}
+
+Tone: direct and concise. Avoid hedging.</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+window.PAGE_PROMPT = {
+  beginner: {{ page.beginner | jsonify }},
+  power: {{ page.power | jsonify }}
+};
+</script>
+<script src="{{ '/assets/js/prompt.js' | relative_url }}"></script>
