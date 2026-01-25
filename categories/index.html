@@ -1,0 +1,44 @@
+---
+title: Categories
+description: Browse the prompt library by category.
+layout: default
+---
+<section class="pageHead">
+  <div class="container">
+    <div class="breadcrumbs"><a href="{{ '/' | relative_url }}">Home</a> <span class="sep">/</span> Categories</div>
+    <h1>Browse by category</h1>
+    <p class="muted">Structured, reusable templates for everyday work, learning, and planning.</p>
+
+    <div class="statsRow">
+      <div class="stat"><div class="stat__k">Categories</div><div class="stat__v">{{ site.categories | size }}</div></div>
+      <div class="stat"><div class="stat__k">Templates</div><div class="stat__v">{{ site.prompts | size }}</div></div>
+      <div class="stat"><div class="stat__k">Tags</div>
+        <div class="stat__v">
+          {% assign tagset = "" | split: "|" %}
+          {% for p in site.data.prompts %}
+            {% for t in p.tags %}
+              {% unless tagset contains t %}
+                {% assign tagset = tagset | push: t %}
+              {% endunless %}
+            {% endfor %}
+          {% endfor %}
+          {{ tagset | size }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cats cats--lg">
+    {% for c in site.categories %}
+      <a class="cat" href="{{ c.url | relative_url }}">
+        <div class="cat__title">{{ c.title }}</div>
+        <div class="cat__desc">{{ c.description }}</div>
+        <div class="hint muted" style="margin-top:10px">
+          {{ site.prompts | where: "category", c.key | size }} template{% if site.prompts | where: "category", c.key | size != 1 %}s{% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>

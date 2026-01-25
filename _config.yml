@@ -1,0 +1,28 @@
+title: prompts
+description: Reusable prompt templates for everyday work. Beginner + Power User.
+url: ''
+baseurl: ''
+markdown: kramdown
+permalink: pretty
+collections:
+  prompts:
+    output: true
+    permalink: /p/:slug/
+  categories:
+    output: true
+    permalink: /c/:slug/
+defaults:
+- scope:
+    path: ''
+    type: prompts
+  values:
+    layout: prompt
+- scope:
+    path: ''
+    type: categories
+  values:
+    layout: category
+- scope:
+    path: ''
+  values:
+    layout: default
