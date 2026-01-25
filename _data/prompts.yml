@@ -1,0 +1,283 @@
+- key: rewrite_pro
+  slug: rewrite-professionally
+  category: writing
+  title: Rewrite this professionally
+  description: Clean, confident, not robotic.
+  output_type: Rewrite
+  difficulty: Beginner + Power
+  tags:
+  - rewrite
+  - professional
+  - writing
+  - email
+  featured: true
+  beginner: 'Rewrite this to sound professional, clear, and confident.
+
+    Keep the meaning the same.
+
+
+    Text:
+
+    [paste here]'
+  power: '<task>Rewrite the text for a professional context.</task>
+
+    <context>Audience: coworkers or clients.</context>
+
+    <constraints>
+
+    - Keep original meaning
+
+    - Make it concise
+
+    - Remove emotional language
+
+    - Avoid clichés
+
+    </constraints>
+
+    <output_format>
+
+    1) Revised version
+
+    2) 3 variants (short / neutral / warm)
+
+    </output_format>
+
+    <input>[paste here]</input>'
+- key: shorten
+  slug: shorten-without-sounding-rude
+  category: writing
+  title: Shorten without sounding rude
+  description: Keep intent, cut fluff.
+  output_type: Rewrite
+  difficulty: Beginner + Power
+  tags:
+  - shorten
+  - polite
+  - message
+  - rewrite
+  featured: true
+  beginner: 'Shorten this message by 40–60% without sounding rude.
+
+    Keep key details and intent.
+
+
+    Message:
+
+    [paste here]'
+  power: '<task>Shorten the message while keeping tone polite.</task>
+
+    <constraints>
+
+    - Keep key details (dates/times/questions)
+
+    - Remove filler
+
+    - Preserve respectful tone
+
+    </constraints>
+
+    <output_format>
+
+    Version A: shortest possible
+
+    Version B: slightly warmer
+
+    </output_format>
+
+    <input>[paste here]</input>'
+- key: firm_reply
+  slug: polite-but-firm-reply
+  category: writing
+  title: Polite but firm reply
+  description: Boundaries without drama.
+  output_type: Email
+  difficulty: Beginner + Power
+  tags:
+  - email
+  - reply
+  - firm
+  - polite
+  - communication
+  featured: true
+  beginner: 'Write a polite but firm reply to this message.
+
+    Be calm, direct, and professional.
+
+
+    Message:
+
+    [paste here]'
+  power: '<role>You are skilled in professional correspondence.</role>
+
+    <task>Draft a polite but firm reply.</task>
+
+    <constraints>
+
+    - Calm tone
+
+    - Avoid blame
+
+    - Keep it short
+
+    - Include 1 clear call-to-action
+
+    </constraints>
+
+    <output_format>
+
+    Subject line + email body
+
+    </output_format>
+
+    <input>[paste here]</input>'
+- key: summarize_quiz
+  slug: summarize-and-quiz-me
+  category: study
+  title: Summarize + quiz me
+  description: Learn faster with testing.
+  output_type: Study
+  difficulty: Beginner + Power
+  tags:
+  - study
+  - quiz
+  - summary
+  - learning
+  featured: true
+  beginner: 'Summarize this in plain language, then quiz me with 10 questions.
+
+    Include an answer key.
+
+
+    Text:
+
+    [paste here]'
+  power: '<task>Summarize and assess understanding.</task>
+
+    <output_format>
+
+    1) Summary (150–250 words)
+
+    2) Key points (5)
+
+    3) Quiz (10 questions)
+
+    4) Answers:
+
+    </output_format>
+
+    <input>[paste here]</input>'
+- key: decision
+  slug: help-me-decide
+  category: life
+  title: Help me decide
+  description: Weighted criteria + recommendation.
+  output_type: Decision
+  difficulty: Beginner + Power
+  tags:
+  - decision
+  - pros cons
+  - compare
+  featured: true
+  beginner: 'Help me decide between Option A and Option B.
+
+    Ask me questions if needed.
+
+    Then recommend the best option and explain why.
+
+
+    Option A:
+
+    [details]
+
+
+    Option B:
+
+    [details]'
+  power: '<task>Help choose between two options using a decision framework.</task>
+
+    <constraints>
+
+    - Ask up to 5 clarifying questions if needed
+
+    - Stay practical and realistic
+
+    </constraints>
+
+    <output_format>
+
+    1) Clarifying questions (if needed)
+
+    2) Weighted criteria table
+
+    3) Recommendation
+
+    4) What would change the decision
+
+    </output_format>
+
+    <input>
+
+    Option A: [details]
+
+    Option B: [details]
+
+    </input>'
+- key: itinerary
+  slug: realistic-itinerary-builder
+  category: travel
+  title: Realistic itinerary builder
+  description: No overpacked days.
+  output_type: Plan
+  difficulty: Beginner + Power
+  tags:
+  - travel
+  - itinerary
+  - planning
+  - budget
+  featured: true
+  beginner: 'Create a realistic itinerary for:
+
+    Destination: [place]
+
+    Days: [number]
+
+    Style: [slow/active]
+
+    Budget: [budget/mid]
+
+    Interests: [paste]
+
+
+    Avoid overpacking days and include flexibility.'
+  power: '<task>Create a realistic travel itinerary.</task>
+
+    <context>
+
+    Destination: [place]
+
+    Days: [number]
+
+    Travel style: [slow/active]
+
+    Budget: [budget/mid]
+
+    Must-do: [paste]
+
+    </context>
+
+    <constraints>
+
+    - Avoid overpacking days
+
+    - Include buffer time
+
+    - Include cost notes when relevant
+
+    </constraints>
+
+    <output_format>
+
+    Day-by-day plan + alternatives + budget notes
+
+    </output_format>'

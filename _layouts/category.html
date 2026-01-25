@@ -1,0 +1,83 @@
+---
+layout: default
+---
+<section class="pageHead">
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="{{ '/' | relative_url }}">Home</a> <span class="sep">/</span>
+      <a href="{{ '/categories/' | relative_url }}">Categories</a> <span class="sep">/</span>
+      {{ page.title }}
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="muted">{{ page.description }}</p>
+
+    <div class="utilityBar">
+      <div class="utilityLeft">
+        <div class="chips" id="tagChips"></div>
+      </div>
+      <div class="utilityRight">
+        <label class="tiny">Sort</label>
+        <select id="sortSelect" class="selectSm">
+          <option value="recommended">Recommended</option>
+          <option value="title">Title (A–Z)</option>
+        </select>
+        <a class="btn btn--ghost btn--sm" href="{{ '/builder/?cat=' | relative_url }}{{ page.key }}">Open Builder</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <h2>Featured</h2>
+      <p>Good starting points for this category.</p>
+    </div>
+    <div class="cards" id="featuredCards">
+      {% assign featured = site.prompts | where: "category", page.key | where: "featured", true %}
+      {% if featured.size == 0 %}
+        <div class="muted">No featured templates yet for this category.</div>
+      {% else %}
+        {% for pr in featured %}
+        <article class="card">
+          <div class="card__top">
+            <div class="card__title">{{ pr.title }}</div>
+            <div class="card__sub">{{ pr.description }}</div>
+          </div>
+          <div class="card__foot">
+            <span class="pill">{{ pr.output_type | default: "Template" }}</span>
+            <a class="link" href="{{ pr.url }}">Open →</a>
+          </div>
+        </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>All templates</h2>
+      <p>Browse everything in this category.</p>
+    </div>
+    <div class="cards cards--wide" id="allCards">
+      {% assign all = site.prompts | where: "category", page.key | sort: "title" %}
+      {% for pr in all %}
+      <article class="card">
+        <div class="card__top">
+          <div class="card__title">{{ pr.title }}</div>
+          <div class="card__sub">{{ pr.description }}</div>
+        </div>
+        <div class="card__foot">
+          <span class="pill">{{ pr.output_type | default: "Template" }}</span>
+          <a class="link" href="{{ pr.url }}">Open →</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script src="{{ \'/assets/js/prompts-data.js\' | relative_url }}"></script>
+<script src="{{ \'/assets/js/category.js\' | relative_url }}"></script>
