@@ -3,29 +3,7 @@ title: Prompt Builder
 description: Build a finished prompt from templates.
 layout: default
 ---
-<header class="topbar">
-    <div class="container topbar__inner">
-      <a class="brand" href="/" aria-label="prompts home">
-        <span class="brand__mark" aria-hidden="true"></span>
-        <span class="brand__word">prompts</span>
-        <span class="brand__by">by Brandon Himpfen</span>
-      </a>
-
-      <div class="topbar__search">
-        <span class="icon" aria-hidden="true">⌕</span>
-        <input id="builderSearchTop" type="search" placeholder="Search prompts…" />
-        <button id="clearBuilderSearchTop" class="clear" aria-label="Clear">×</button>
-      </div>
-
-      <nav class="nav">
-        <a class="nav__link" href="/categories/">Categories</a>
-        <a class="nav__link" href="/#featured">Featured</a>
-        <a class="nav__cta" href="./builder.html">Builder</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="builder">
+<main class="builder">
     <div class="container builder__inner">
       <aside class="sidebar">
         <div class="sidebar__head">
@@ -86,7 +64,7 @@ layout: default
           </div>
           <div class="work__actions">
             <button id="randomPick" class="btn btn--ghost btn--sm">Random</button>
-            <a class="btn btn--ghost btn--sm" href="/">Home</a>
+            <a class="btn btn--ghost btn--sm" href="{{ '/' | relative_url }}">Home</a>
           </div>
         </div>
 
@@ -95,5 +73,5 @@ layout: default
     </div>
   </main>
 
-  <script src="/assets/js/prompts-data.js"></script>
-  <script src="/assets/js/builder.js"></script>
+  <script src="{{ \'/assets/js/prompts-data.js\' | relative_url }}"></script>
+  <script src="{{ \'/assets/js/builder.js\' | relative_url }}"></script>

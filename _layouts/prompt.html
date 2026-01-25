@@ -3,10 +3,11 @@ layout: default
 ---
 <section class="pageHead">
   <div class="container">
-    <div class="breadcrumbs">
+    {% assign catpage = site.prompt_categories | where: "key", page.category | first %}
+<div class="breadcrumbs">
       <a href="/">Home</a> <span class="sep">/</span>
-      <a href="/categories/">Categories</a> <span class="sep">/</span>
-      <a href="/c/{{ page.category }}/">{{ page.category_title }}</a> <span class="sep">/</span>
+      <a href="{{ '/categories/' | relative_url }}">Categories</a> <span class="sep">/</span>
+      <a href="{{ catpage.url }}">{{ page.category_title }}</a> <span class="sep">/</span>
       {{ page.title }}
     </div>
     <h1>{{ page.title }}</h1>
@@ -40,7 +41,7 @@ layout: default
       <div class="panelLite__body">
         <div class="promptBtns">
           <button id="copyTemplate" class="btn btn--primary">Copy template</button>
-          <a class="btn btn--ghost" href="/builder/?prompt={{ page.key }}">Use in Builder</a>
+          <a class="btn btn--ghost" href="{{ '/builder/?prompt=' | relative_url }}{{ page.key }}">Use in Builder</a>
         </div>
         <div id="promptToast" class="toast" role="status" aria-live="polite">Copied</div>
 
