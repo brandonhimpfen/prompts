@@ -2,9 +2,6 @@
 title: prompts
 description: Reusable prompt templates for everyday work. Beginner + Power User.
 layout: default
-extra_js: |
-  <script src="{{ '/assets/js/prompts-data.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 ---
 <section class="hero">
   <div class="container hero__inner">
@@ -17,23 +14,14 @@ extra_js: |
       </p>
 
       <div class="actions">
-        <a class="btn btn--primary" href="{{ '/builder/' | relative_url }}">Open Prompt Builder</a>
+        <a class="btn btn--primary" href="/builder/">Open Prompt Builder</a>
         <a class="btn btn--ghost" href="#featured">Browse Featured</a>
       </div>
 
       <div class="metaRow">
-        <div class="meta">
-          <div class="meta__k">Modes</div>
-          <div class="meta__v">Beginner + Power User</div>
-        </div>
-        <div class="meta">
-          <div class="meta__k">Use case</div>
-          <div class="meta__v">Writing, planning, learning</div>
-        </div>
-        <div class="meta">
-          <div class="meta__k">Copy</div>
-          <div class="meta__v">One click</div>
-        </div>
+        <div class="meta"><div class="meta__k">Modes</div><div class="meta__v">Beginner + Power User</div></div>
+        <div class="meta"><div class="meta__k">Use case</div><div class="meta__v">Writing, planning, learning</div></div>
+        <div class="meta"><div class="meta__k">Copy</div><div class="meta__v">One click</div></div>
       </div>
     </div>
 
@@ -53,13 +41,12 @@ extra_js: |
         <div class="panel__body">
           <div class="list">
             <div class="list__label">Top picks</div>
-
             {% assign picks = site.prompts | where: "featured", true | sort: "title" %}
             {% for pr in picks limit:6 %}
-            <button class="row js-pick" data-prompt="{{ pr.key }}">
-              <span class="row__title">{{ pr.title }}</span>
-              <span class="row__tag">{{ pr.output_type | default: "Template" }}</span>
-            </button>
+              <button class="row js-pick" data-prompt="{{ pr.key }}">
+                <span class="row__title">{{ pr.title }}</span>
+                <span class="row__tag">{{ pr.output_type | default: "Template" }}</span>
+              </button>
             {% endfor %}
           </div>
 
@@ -69,7 +56,7 @@ extra_js: |
 
             <div class="preview__actions">
               <button id="copyPreview" class="btn btn--primary btn--sm">Copy</button>
-              <a class="btn btn--ghost btn--sm" href="{{ '/builder/' | relative_url }}">Open builder</a>
+              <a class="btn btn--ghost btn--sm" href="/builder/">Open builder</a>
             </div>
             <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
           </div>
@@ -95,7 +82,7 @@ extra_js: |
 
   <div class="container cats">
     {% for c in site.prompt_categories %}
-      <a class="cat" href="{{ c.url | relative_url }}">
+      <a class="cat" href="{{ c.url }}">
         <div class="cat__title">{{ c.title }}</div>
         <div class="cat__desc">{{ c.description }}</div>
       </a>
@@ -103,7 +90,7 @@ extra_js: |
   </div>
 </section>
 
-<section id="featured class="section section--alt">
+<section id="featured" class="section section--alt">
   <div class="container section__head">
     <h2>Featured prompts</h2>
     <p>Start with these and expand from there.</p>
@@ -118,7 +105,7 @@ extra_js: |
       </div>
       <div class="card__foot">
         <span class="pill">{{ pr.output_type | default: "Template" }}</span>
-        <a class="link" href="{{ pr.url | relative_url }}">Open →</a>
+        <a class="link" href="{{ pr.url }}">Open →</a>
       </div>
     </article>
     {% endfor %}
@@ -132,8 +119,11 @@ extra_js: |
       <p>The builder generates finished prompts based on your inputs and lets you switch between Beginner and Power User formats.</p>
     </div>
     <div class="callout__actions">
-      <a class="btn btn--primary" href="{{ '/builder/' | relative_url }}">Open Builder</a>
-      <a class="btn btn--ghost" href="{{ '/categories/' | relative_url }}">Browse categories</a>
+      <a class="btn btn--primary" href="/builder/">Open Builder</a>
+      <a class="btn btn--ghost" href="/categories/">Browse categories</a>
     </div>
   </div>
 </section>
+
+<script src="/assets/js/prompts-data.js"></script>
+<script src="/assets/js/main.js"></script>

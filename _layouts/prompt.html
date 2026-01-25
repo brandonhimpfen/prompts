@@ -4,9 +4,9 @@ layout: default
 <section class="pageHead">
   <div class="container">
     <div class="breadcrumbs">
-      <a href="{{ '/' | relative_url }}">Home</a> <span class="sep">/</span>
-      <a href="{{ '/categories/' | relative_url }}">Categories</a> <span class="sep">/</span>
-      <a href="{{ '/c/' | append: page.category | append: '/' | relative_url }}">{{ page.category_title }}</a> <span class="sep">/</span>
+      <a href="/">Home</a> <span class="sep">/</span>
+      <a href="/categories/">Categories</a> <span class="sep">/</span>
+      <a href="/c/{{ page.category }}/">{{ page.category_title }}</a> <span class="sep">/</span>
       {{ page.title }}
     </div>
     <h1>{{ page.title }}</h1>
@@ -40,21 +40,21 @@ layout: default
       <div class="panelLite__body">
         <div class="promptBtns">
           <button id="copyTemplate" class="btn btn--primary">Copy template</button>
-          <a class="btn btn--ghost" href="{{ '/builder/?prompt=' | append: page.key | relative_url }}">Use in Builder</a>
+          <a class="btn btn--ghost" href="/builder/?prompt={{ page.key }}">Use in Builder</a>
         </div>
         <div id="promptToast" class="toast" role="status" aria-live="polite">Copied</div>
 
         <div class="mini">
           <div class="mini__k">What it’s for</div>
-          <div class="mini__v">{{ page.what_for }}</div>
+          <div class="mini__v">Use this when you need “{{ page.output_type | default: "a result" }}” quickly without rewriting from scratch.</div>
         </div>
         <div class="mini">
           <div class="mini__k">Works best when you include</div>
-          <div class="mini__v">{{ page.works_best }}</div>
+          <div class="mini__v">Audience, goal, constraints, and the exact output format you want back.</div>
         </div>
         <div class="mini">
           <div class="mini__k">Common mistakes</div>
-          <div class="mini__v">{{ page.mistakes }}</div>
+          <div class="mini__v">Vague instructions, missing context, or not specifying the format of the answer.</div>
         </div>
       </div>
     </div>
@@ -70,11 +70,17 @@ layout: default
       <div class="exampleGrid">
         <div class="example panelLite">
           <div class="panelLite__head"><div class="panelLite__title">Example input</div></div>
-          <div class="panelLite__body"><pre class="code">{{ page.example_input }}</pre></div>
+          <div class="panelLite__body"><pre class="code">Context:
+[paste here]
+
+Goal:
+[what you want back]</pre></div>
         </div>
+
         <div class="example panelLite">
           <div class="panelLite__head"><div class="panelLite__title">Example output</div></div>
-          <div class="panelLite__body"><pre class="code">{{ page.example_output }}</pre></div>
+          <div class="panelLite__body"><pre class="code">Example output appears here.
+(Replace this with real examples later.)</pre></div>
         </div>
       </div>
 
@@ -84,15 +90,34 @@ layout: default
       </div>
 
       <div class="variants">
-        {% for v in page.variants %}
+        {% assign v1 = page.beginner | strip_newlines | slice: 0, 220 %}
         <div class="variant">
           <div class="variant__top">
-            <div class="variant__title">{{ v.title }}</div>
-            <button class="btn btn--ghost btn--sm js-copy-variant" data-text="{{ v.text | escape }}">Copy</button>
+            <div class="variant__title">Short version</div>
+            <button class="btn btn--ghost btn--sm js-copy-variant" data-text="{{ page.beginner | strip_newlines | slice: 0, 220 | escape }}…">Copy</button>
           </div>
-          <pre class="code">{{ v.text }}</pre>
+          <pre class="code">{{ v1 }}…</pre>
         </div>
-        {% endfor %}
+
+        <div class="variant">
+          <div class="variant__top">
+            <div class="variant__title">Warmer tone</div>
+            <button class="btn btn--ghost btn--sm js-copy-variant" data-text="{{ page.beginner | append: '\n\nTone: warm, human, and respectful.' | escape }}">Copy</button>
+          </div>
+          <pre class="code">{{ page.beginner }}
+
+Tone: warm, human, and respectful.</pre>
+        </div>
+
+        <div class="variant">
+          <div class="variant__top">
+            <div class="variant__title">More direct</div>
+            <button class="btn btn--ghost btn--sm js-copy-variant" data-text="{{ page.beginner | append: '\n\nTone: direct and concise. Avoid hedging.' | escape }}">Copy</button>
+          </div>
+          <pre class="code">{{ page.beginner }}
+
+Tone: direct and concise. Avoid hedging.</pre>
+        </div>
       </div>
     </div>
   </div>
@@ -107,37 +132,27 @@ layout: default
   const copyBtn = document.querySelector("#copyTemplate");
   const toast = document.querySelector("#promptToast");
 
-  let mode = "beginner";
-
   function setMode(next){
-    mode = next;
-    modeBtns.forEach(b => b.classList.toggle("is-active", b.dataset.mode === mode));
-    templateBox.textContent = mode === "power" ? power : beginner;
+    modeBtns.forEach(b => b.classList.toggle("is-active", b.dataset.mode === next));
+    templateBox.textContent = next === "power" ? power : beginner;
   }
 
   async function copyText(txt){
     try{ await navigator.clipboard.writeText(txt); }
     catch(e){
       const ta = document.createElement("textarea");
-      ta.value = txt;
-      document.body.appendChild(ta); ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
+      ta.value = txt; document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta);
     }
   }
-
-  function showToast(){
-    toast.style.display = "block";
-    setTimeout(()=> toast.style.display = "none", 1100);
-  }
+  function showToast(){ toast.style.display="block"; setTimeout(()=>toast.style.display="none", 1100); }
 
   modeBtns.forEach(btn => btn.addEventListener("click", ()=> setMode(btn.dataset.mode)));
   copyBtn.addEventListener("click", async ()=>{ await copyText(templateBox.textContent); showToast(); });
 
   document.querySelectorAll(".js-copy-variant").forEach(btn=>{
     btn.addEventListener("click", async ()=>{
-      const t = btn.getAttribute("data-text");
-      await copyText(t);
+      await copyText(btn.getAttribute("data-text"));
       showToast();
     });
   });

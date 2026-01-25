@@ -2,19 +2,10 @@
 <html lang="en">
 <head>
   {% include head.html %}
-  {% if page.extra_head %}{{ page.extra_head }}{% endif %}
 </head>
 <body>
   {% include topbar.html %}
-
-  <main>
-    {{ content }}
-  </main>
-
+  <main>{{ content }}</main>
   {% include footer.html %}
-
-  {% if page.extra_js %}
-  {{ page.extra_js }}
-  {% endif %}
 </body>
 </html>

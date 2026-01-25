@@ -1,18 +1,15 @@
-# prompts — Jekyll site (LinkedIn Learning-style UI)
+# prompts — Jekyll
 
-A Jekyll version of **prompts by Brandon Himpfen**.
+This is a Jekyll version that builds to the same UI/functionality as the static site.
 
-## Run locally
+## Local run
 ```bash
 bundle install
 bundle exec jekyll serve
 ```
 
-## Structure
-- `_prompts/` — prompt template pages
-- `_categories/` — category pages
-- `/builder/` — interactive builder (client-side JS)
+Then open: http://127.0.0.1:4000
 
-## Data
-- `_data/prompts.json`
-- `_data/categories.json`
+## Notes
+- `/assets/js/prompts-data.js` is generated from `_data/prompts.yml` at build time.
+- The Builder markup matches the working static version, so `builder.js` loads correctly.

@@ -4,8 +4,8 @@ layout: default
 <section class="pageHead">
   <div class="container">
     <div class="breadcrumbs">
-      <a href="{{ '/' | relative_url }}">Home</a> <span class="sep">/</span>
-      <a href="{{ '/categories/' | relative_url }}">Categories</a> <span class="sep">/</span>
+      <a href="/">Home</a> <span class="sep">/</span>
+      <a href="/categories/">Categories</a> <span class="sep">/</span>
       {{ page.title }}
     </div>
     <h1>{{ page.title }}</h1>
@@ -13,23 +13,7 @@ layout: default
 
     <div class="utilityBar">
       <div class="utilityLeft">
-        <div class="chips">
-          <button class="chip is-active" data-tag="all">All</button>
-          {% assign tagset = "" | split: "|" %}
-          {% for p in site.data.prompts %}
-            {% if p.category == page.key %}
-              {% for t in p.tags %}
-                {% unless tagset contains t %}
-                  {% assign tagset = tagset | push: t %}
-                {% endunless %}
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-          {% assign tagset = tagset | sort %}
-          {% for t in tagset %}
-            <button class="chip" data-tag="{{ t }}">{{ t }}</button>
-          {% endfor %}
-        </div>
+        <div class="chips" id="tagChips"></div>
       </div>
       <div class="utilityRight">
         <label class="tiny">Sort</label>
@@ -37,7 +21,7 @@ layout: default
           <option value="recommended">Recommended</option>
           <option value="title">Title (A–Z)</option>
         </select>
-        <a class="btn btn--ghost btn--sm" href="{{ '/builder/?cat=' | append: page.key | relative_url }}">Open Builder</a>
+        <a class="btn btn--ghost btn--sm" href="/builder/?cat={{ page.key }}">Open Builder</a>
       </div>
     </div>
   </div>
@@ -50,7 +34,7 @@ layout: default
       <p>Good starting points for this category.</p>
     </div>
     <div class="cards" id="featuredCards">
-      {% assign featured = site.prompts | where: "category", page.key | where_exp: "x", "x.featured == true" %}
+      {% assign featured = site.prompts | where: "category", page.key | where: "featured", true %}
       {% if featured.size == 0 %}
         <div class="muted">No featured templates yet for this category.</div>
       {% else %}
@@ -62,7 +46,7 @@ layout: default
           </div>
           <div class="card__foot">
             <span class="pill">{{ pr.output_type | default: "Template" }}</span>
-            <a class="link" href="{{ pr.url | relative_url }}">Open →</a>
+            <a class="link" href="{{ pr.url }}">Open →</a>
           </div>
         </article>
         {% endfor %}
@@ -80,14 +64,14 @@ layout: default
     <div class="cards cards--wide" id="allCards">
       {% assign all = site.prompts | where: "category", page.key | sort: "title" %}
       {% for pr in all %}
-      <article class="card" data-tags="{{ pr.tags | join: ',' }}">
+      <article class="card">
         <div class="card__top">
           <div class="card__title">{{ pr.title }}</div>
           <div class="card__sub">{{ pr.description }}</div>
         </div>
         <div class="card__foot">
           <span class="pill">{{ pr.output_type | default: "Template" }}</span>
-          <a class="link" href="{{ pr.url | relative_url }}">Open →</a>
+          <a class="link" href="{{ pr.url }}">Open →</a>
         </div>
       </article>
       {% endfor %}
@@ -95,35 +79,5 @@ layout: default
   </div>
 </section>
 
-<script>
-(function(){
-  const chips = document.querySelectorAll(".chip");
-  const cards = document.querySelectorAll("#allCards .card");
-  const sort = document.querySelector("#sortSelect");
-  let active = "all";
-
-  function apply(){
-    cards.forEach(c=>{
-      const tags = (c.getAttribute("data-tags") || "").split(",").filter(Boolean);
-      const ok = (active === "all") || tags.includes(active);
-      c.style.display = ok ? "" : "none";
-    });
-  }
-
-  chips.forEach(ch=>{
-    ch.addEventListener("click", ()=>{
-      chips.forEach(x=>x.classList.remove("is-active"));
-      ch.classList.add("is-active");
-      active = ch.getAttribute("data-tag");
-      apply();
-    });
-  });
-
-  sort?.addEventListener("change", ()=>{
-    // Since Jekyll already sorted the HTML by title, we keep "title" stable.
-    // "recommended" could later be implemented via featured-first ordering.
-  });
-
-  apply();
-})();
-</script>
+<script src="/assets/js/prompts-data.js"></script>
+<script src="/assets/js/category.js"></script>

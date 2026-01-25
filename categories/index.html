@@ -5,7 +5,7 @@ layout: default
 ---
 <section class="pageHead">
   <div class="container">
-    <div class="breadcrumbs"><a href="{{ '/' | relative_url }}">Home</a> <span class="sep">/</span> Categories</div>
+    <div class="breadcrumbs"><a href="/">Home</a> <span class="sep">/</span> Categories</div>
     <h1>Browse by category</h1>
     <p class="muted">Structured, reusable templates for everyday work, learning, and planning.</p>
 
@@ -32,7 +32,7 @@ layout: default
 <section class="section">
   <div class="container cats cats--lg">
     {% for c in site.prompt_categories %}
-      <a class="cat" href="{{ c.url | relative_url }}">
+      <a class="cat" href="{{ c.url }}">
         <div class="cat__title">{{ c.title }}</div>
         <div class="cat__desc">{{ c.description }}</div>
         <div class="hint muted" style="margin-top:10px">
