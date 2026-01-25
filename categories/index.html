@@ -10,7 +10,7 @@ layout: default
     <p class="muted">Structured, reusable templates for everyday work, learning, and planning.</p>
 
     <div class="statsRow">
-      <div class="stat"><div class="stat__k">Categories</div><div class="stat__v">{{ site.categories | size }}</div></div>
+      <div class="stat"><div class="stat__k">Categories</div><div class="stat__v">{{ site.prompt_categories | size }}</div></div>
       <div class="stat"><div class="stat__k">Templates</div><div class="stat__v">{{ site.prompts | size }}</div></div>
       <div class="stat"><div class="stat__k">Tags</div>
         <div class="stat__v">
@@ -31,7 +31,7 @@ layout: default
 
 <section class="section">
   <div class="container cats cats--lg">
-    {% for c in site.categories %}
+    {% for c in site.prompt_categories %}
       <a class="cat" href="{{ c.url | relative_url }}">
         <div class="cat__title">{{ c.title }}</div>
         <div class="cat__desc">{{ c.description }}</div>

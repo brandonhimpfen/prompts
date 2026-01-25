@@ -1,6 +1,6 @@
 # prompts — Jekyll site (LinkedIn Learning-style UI)
 
-A Jekyll version of **prompts by Brandon Himpfen**, using the same clean, restrained UI.
+A Jekyll version of **prompts by Brandon Himpfen**.
 
 ## Run locally
 ```bash
@@ -11,9 +11,8 @@ bundle exec jekyll serve
 ## Structure
 - `_prompts/` — prompt template pages
 - `_categories/` — category pages
-- `_data/prompts.yml` — prompt data (used to generate JS + lists)
-- `builder/` — dedicated prompt builder page (reads the generated `assets/js/prompts-data.js`)
+- `/builder/` — interactive builder (client-side JS)
 
-## Add a prompt
-1. Add an entry to `_data/prompts.yml`
-2. Add a file to `_prompts/` with matching `key` in front matter (or copy an existing one)
+## Data
+- `_data/prompts.json`
+- `_data/categories.json`

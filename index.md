@@ -1,11 +1,9 @@
 ---
-title: prompts
-description: Reusable prompt templates for everyday work. Beginner + Power User.
 layout: default
-extra_js: |
-  <script src="{{ '/assets/js/prompts-data.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+title: "Home"
+description: "Reusable prompt templates for everyday work, learning, and planning."
 ---
+
 <section class="hero">
   <div class="container hero__inner">
     <div class="hero__copy">
@@ -53,13 +51,12 @@ extra_js: |
         <div class="panel__body">
           <div class="list">
             <div class="list__label">Top picks</div>
-
-            {% assign picks = site.prompts | where: "featured", true | sort: "title" %}
+            {% assign picks = site.prompts | where: "category", "writing" %}
             {% for pr in picks limit:6 %}
-            <button class="row js-pick" data-prompt="{{ pr.key }}">
-              <span class="row__title">{{ pr.title }}</span>
-              <span class="row__tag">{{ pr.output_type | default: "Template" }}</span>
-            </button>
+              <a class="row" href="{{ pr.url | relative_url }}">
+                <span class="row__title">{{ pr.title }}</span>
+                <span class="row__tag">{{ pr.category }}</span>
+              </a>
             {% endfor %}
           </div>
 
@@ -90,50 +87,41 @@ extra_js: |
 <section id="categories" class="section">
   <div class="container section__head">
     <h2>Browse by category</h2>
-    <p>Pick a category and jump into the library.</p>
+    <p>Pick a category and explore templates.</p>
   </div>
 
   <div class="container cats">
-    {% for c in site.prompt_categories %}
-      <a class="cat" href="{{ c.url | relative_url }}">
-        <div class="cat__title">{{ c.title }}</div>
-        <div class="cat__desc">{{ c.description }}</div>
+    {% for cat in site.categories %}
+    {% endfor %}
+    {% for cat in site.data.categories %}
+      <a class="cat" href="{{ '/c/' | append: cat.slug | append: '/' | relative_url }}">
+        <div class="cat__title">{{ cat.title }}</div>
+        <div class="cat__desc">{{ cat.desc }}</div>
       </a>
     {% endfor %}
   </div>
 </section>
 
-<section id="featured class="section section--alt">
+<section id="featured" class="section section--alt">
   <div class="container section__head">
     <h2>Featured prompts</h2>
     <p>Start with these and expand from there.</p>
   </div>
 
   <div class="container cards">
-    {% for pr in picks limit:6 %}
-    <article class="card">
-      <div class="card__top">
-        <div class="card__title">{{ pr.title }}</div>
-        <div class="card__sub">{{ pr.description }}</div>
-      </div>
-      <div class="card__foot">
-        <span class="pill">{{ pr.output_type | default: "Template" }}</span>
-        <a class="link" href="{{ pr.url | relative_url }}">Open →</a>
-      </div>
-    </article>
+    {% for pr in site.prompts limit:6 %}
+      <article class="card">
+        <div class="card__top">
+          <div class="card__title">{{ pr.title }}</div>
+          <div class="card__sub">{{ pr.description }}</div>
+        </div>
+        <div class="card__foot">
+          <span class="pill">{{ pr.output_type }}</span>
+          <a class="link" href="{{ pr.url | relative_url }}">Open →</a>
+        </div>
+      </article>
     {% endfor %}
   </div>
 </section>
 
-<section class="section">
-  <div class="container callout">
-    <div class="callout__copy">
-      <h2>Use the Builder for the best experience</h2>
-      <p>The builder generates finished prompts based on your inputs and lets you switch between Beginner and Power User formats.</p>
-    </div>
-    <div class="callout__actions">
-      <a class="btn btn--primary" href="{{ '/builder/' | relative_url }}">Open Builder</a>
-      <a class="btn btn--ghost" href="{{ '/categories/' | relative_url }}">Browse categories</a>
-    </div>
-  </div>
-</section>
+<script src="{{ '/assets/js/home-preview.js' | relative_url }}"></script>

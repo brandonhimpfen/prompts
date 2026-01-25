@@ -8,7 +8,7 @@ collections:
   prompts:
     output: true
     permalink: /p/:slug/
-  categories:
+  prompt_categories:
     output: true
     permalink: /c/:slug/
 defaults:
@@ -19,7 +19,7 @@ defaults:
     layout: prompt
 - scope:
     path: ''
-    type: categories
+    type: prompt_categories
   values:
     layout: category
 - scope:
