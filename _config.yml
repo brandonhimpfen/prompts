@@ -13,6 +13,10 @@ collections:
     permalink: /c/:slug/
 defaults:
 - scope:
+    path: assets
+  values:
+    layout: null
+- scope:
     path: ''
     type: prompts
   values:
