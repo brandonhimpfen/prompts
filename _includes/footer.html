@@ -1,17 +1,33 @@
-<footer class="footer">
-  <div class="container footer__inner">
-    <div class="footer__left">
-      <div class="footer__brand">
-        <span class="brand__mark" aria-hidden="true"></span>
-        <strong>prompts</strong>
-        <span class="muted">by Brandon Himpfen</span>
+<footer class="site-footer mt-5">
+  <div class="container-xxl py-4 py-lg-5">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-6">
+        <div class="footer-brand d-flex align-items-center gap-3 mb-3">
+          <img src="https://www.himpfen.com/content/images/size/w256h256/2025/11/bhicon-transparent-blue-5.png" alt="Brandon Himpfen" class="footer-avatar">
+          <div>
+            <div class="footer-title">prompts</div>
+            <div class="footer-subtitle">A calm library of reusable prompts for work, writing, planning, and learning.</div>
+          </div>
+        </div>
+        <p class="footer-copy mb-0">Built to feel like a practical content dashboard: fast search, clean categories, copy-ready templates, and a builder for adapting prompts to real situations.</p>
       </div>
-      <p class="muted">A practical prompt library focused on clarity, outcomes, and everyday usefulness.</p>
-    </div>
-    <div class="footer__right">
-      <a href="{{ '/categories/' | relative_url }}">Categories</a>
-      <a href="{{ '/#featured' | relative_url }}">Featured</a>
-      <a href="{{ '/builder/' | relative_url }}">Builder</a>
+      <div class="col-sm-6 col-lg-3">
+        <div class="footer-heading">Browse</div>
+        <ul class="footer-links list-unstyled mb-0">
+          <li><a href="{{ '/' | relative_url }}">Prompt library</a></li>
+          <li><a href="{{ '/categories/' | relative_url }}">All categories</a></li>
+          <li><a href="{{ '/builder/' | relative_url }}">Prompt builder</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="footer-heading">Project</div>
+        <ul class="footer-links list-unstyled mb-0">
+          <li><a href="https://www.himpfen.com/">Himpfen</a></li>
+          <li><a href="https://office-ai-playbook.himpfen.com/">Office AI Playbook</a></li>
+          <li><a href="https://www.himpfen.com/projects/">Projects</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

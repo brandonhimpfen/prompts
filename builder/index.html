@@ -1,79 +1,92 @@
 ---
 title: Prompt Builder
-description: Build a finished prompt from templates.
+description: Build a finished prompt from the prompts content library.
 layout: default
 ---
-
-
-  <main class="builder">
-    <div class="container builder__inner">
-      <aside class="sidebar">
-        <div class="sidebar__head">
-          <h1>Prompt Builder</h1>
-          <p class="muted">Pick a template, add your details, copy the finished prompt.</p>
+<section class="page-hero py-4 py-lg-5">
+  <div class="container-xxl">
+    <div class="app-card page-hero-card">
+      <div class="breadcrumb-line"><a href="{{ '/' | relative_url }}">Library</a> <span>/</span> Prompt Builder</div>
+      <div class="row g-4 align-items-end">
+        <div class="col-lg-8">
+          <div class="section-label">Builder</div>
+          <h1 class="display-title page-title">Turn library templates into finished prompts</h1>
+          <p class="hero-copy mb-0">Choose a category, select a prompt, add your details, and copy a more usable result for work, writing, planning, or learning.</p>
         </div>
-
-        <div class="controls">
-          <div class="control">
-            <label>Category</label>
-            <select id="catSelect">
-              <option value="all">All</option>
-              <option value="writing">Writing & Communication</option>
-              <option value="career">Work & Career</option>
-              <option value="study">Learning & Studying</option>
-              <option value="life">Life Admin & Decisions</option>
-              <option value="travel">Travel & Planning</option>
-              <option value="food">Food & Fitness</option>
-              <option value="tech">Tech Help</option>
-              <option value="creator">Creator / Content</option>
-            </select>
+        <div class="col-lg-4">
+          <div class="app-card inset-card h-100">
+            <div class="inset-kicker">Tip</div>
+            <p class="mb-0">The builder works best when you include audience, desired outcome, tone, and any constraints the model should respect.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-          <div class="control">
-            <label>Template</label>
-            <select id="promptSelect"></select>
-            <div id="promptHint" class="hint muted"></div>
+<section class="content-section pb-5">
+  <div class="container-xxl">
+    <div class="row g-4 align-items-start">
+      <div class="col-xl-4">
+        <div class="app-card sticky-panel">
+          <div class="section-label">Builder controls</div>
+          <div class="vstack gap-3 mt-3">
+            <div>
+              <label class="form-label app-label" for="catSelect">Category</label>
+              <select id="catSelect" class="form-select app-select">
+                <option value="all">All</option>
+                <option value="writing">Writing &amp; Communication</option>
+                <option value="work">Work &amp; Career</option>
+                <option value="study">Learning &amp; Studying</option>
+                <option value="life">Life Admin &amp; Decisions</option>
+                <option value="travel">Travel &amp; Planning</option>
+                <option value="food">Food &amp; Fitness</option>
+                <option value="tech">Tech Help</option>
+                <option value="creator">Creator / Content</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label app-label" for="promptSelect">Template</label>
+              <select id="promptSelect" class="form-select app-select"></select>
+              <div id="promptHint" class="helper-text mt-2"></div>
+            </div>
+            <div>
+              <label class="form-label app-label">Mode</label>
+              <div class="seg-toggle seg-toggle-full" role="tablist" aria-label="Mode">
+                <button class="seg-btn is-active" type="button" data-mode="beginner">Beginner</button>
+                <button class="seg-btn" type="button" data-mode="power">Power User</button>
+              </div>
+            </div>
+            <div>
+              <label class="form-label app-label" for="userInput">Your details</label>
+              <textarea id="userInput" class="form-control app-textarea" placeholder="Paste the email, notes, situation, brief, or source material here"></textarea>
+              <div class="helper-text mt-2">Tip: include who it is for, what you need back, and any formatting or tone constraints.</div>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+              <button id="insertExample" class="btn btn-app-secondary" type="button">Insert example</button>
+              <button id="copyBuiltPrompt" class="btn btn-app-primary" type="button">Copy prompt</button>
+            </div>
+            <div id="builderToast" class="copy-toast" role="status" aria-live="polite">Copied</div>
           </div>
-
-          <div class="control">
-            <label>Mode</label>
-            <div class="seg seg--full" role="tablist" aria-label="Mode">
-              <button class="seg__btn is-active" data-mode="beginner" role="tab">Beginner</button>
-              <button class="seg__btn" data-mode="power" role="tab">Power User</button>
+        </div>
+      </div>
+      <div class="col-xl-8">
+        <div class="code-panel h-100">
+          <div class="code-panel-head">
+            <div>
+              <span>Generated prompt</span>
+              <small id="activeModeNote">Beginner format</small>
+            </div>
+            <div class="d-flex gap-2">
+              <button id="randomPick" class="btn btn-app-secondary btn-sm" type="button">Random</button>
+              <a class="btn btn-app-secondary btn-sm" href="{{ '/' | relative_url }}">Back to library</a>
             </div>
           </div>
-
-          <div class="control">
-            <label>Your details</label>
-            <textarea id="userInput" placeholder="Paste the email, notes, situation, or content here…"></textarea>
-            <div class="hint muted">Tip: include audience + constraints + what you want back.</div>
-          </div>
-
-          <div class="control control--actions">
-            <button id="insertExample" class="btn btn--ghost">Insert example</button>
-            <button id="copyBuiltPrompt" class="btn btn--primary">Copy prompt</button>
-          </div>
-
-          <div id="builderToast" class="toast" role="status" aria-live="polite">Copied</div>
+          <pre id="builtPrompt" class="code-block mb-0"></pre>
         </div>
-      </aside>
-
-      <section class="work">
-        <div class="work__head">
-          <div>
-            <div class="work__title">Generated prompt</div>
-            <div class="muted" id="activeModeNote">Beginner format</div>
-          </div>
-          <div class="work__actions">
-            <button id="randomPick" class="btn btn--ghost btn--sm">Random</button>
-            <a class="btn btn--ghost btn--sm" href="{{ '/' | relative_url }}">Home</a>
-          </div>
-        </div>
-
-        <pre id="builtPrompt" class="code code--big"></pre>
-      </section>
+      </div>
     </div>
-  </main>
-
-  <script src="{{ '/assets/js/prompts-data.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/builder.js' | relative_url }}"></script>
+  </div>
+</section>
+<script src="{{ '/assets/js/prompts-data.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/builder.js' | relative_url }}"></script>

@@ -1,44 +1,47 @@
 ---
 title: Categories
-description: Browse the prompt library by category.
+description: Browse the prompts content library by category.
 layout: default
 ---
-<section class="pageHead">
-  <div class="container">
-    <div class="breadcrumbs"><a href="/">Home</a> <span class="sep">/</span> Categories</div>
-    <h1>Browse by category</h1>
-    <p class="muted">Structured, reusable templates for everyday work, learning, and planning.</p>
-
-    <div class="statsRow">
-      <div class="stat"><div class="stat__k">Categories</div><div class="stat__v">{{ site.prompt_categories | size }}</div></div>
-      <div class="stat"><div class="stat__k">Templates</div><div class="stat__v">{{ site.prompts | size }}</div></div>
-      <div class="stat"><div class="stat__k">Tags</div>
-        <div class="stat__v">
-          {% assign tagset = "" | split: "|" %}
-          {% for p in site.data.prompts %}
-            {% for t in p.tags %}
-              {% unless tagset contains t %}
-                {% assign tagset = tagset | push: t %}
-              {% endunless %}
-            {% endfor %}
-          {% endfor %}
-          {{ tagset | size }}
+<section class="page-hero py-4 py-lg-5">
+  <div class="container-xxl">
+    <div class="app-card page-hero-card">
+      <div class="breadcrumb-line"><a href="{{ '/' | relative_url }}">Library</a> <span>/</span> Categories</div>
+      <div class="row g-4 align-items-end">
+        <div class="col-lg-8">
+          <div class="section-label">Content library</div>
+          <h1 class="display-title page-title">Browse prompts by category</h1>
+          <p class="hero-copy mb-0">Explore focused sections for work, writing, study, travel, tech help, creator workflows, and practical life admin tasks.</p>
+        </div>
+        <div class="col-lg-4">
+          <div class="stat-grid stat-grid-compact">
+            <div class="stat-card"><div class="stat-label">Categories</div><div class="stat-value">{{ site.prompt_categories | size }}</div></div>
+            <div class="stat-card"><div class="stat-label">Templates</div><div class="stat-value">{{ site.prompts | size }}</div></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container cats cats--lg">
-    {% for c in site.prompt_categories %}
-      <a class="cat" href="{{ c.url }}">
-        <div class="cat__title">{{ c.title }}</div>
-        <div class="cat__desc">{{ c.description }}</div>
-        <div class="hint muted" style="margin-top:10px">
-          {{ site.prompts | where: "category", c.key | size }} template{% if site.prompts | where: "category", c.key | size != 1 %}s{% endif %}
-        </div>
-      </a>
-    {% endfor %}
+<section class="content-section pb-4">
+  <div class="container-xxl">
+    <div class="row g-4">
+      {% for c in site.prompt_categories %}
+      <div class="col-md-6 col-xl-4">
+        <a class="category-panel h-100" href="{{ c.url }}">
+          <div class="category-panel-top">
+            <span class="library-pill">{{ site.prompts | where: 'category', c.key | size }} prompts</span>
+            <h2>{{ c.title }}</h2>
+            <p>{{ c.description }}</p>
+          </div>
+          <div class="category-panel-bottom">
+            <span>Open category</span>
+            <i class="bi bi-arrow-right"></i>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </section>

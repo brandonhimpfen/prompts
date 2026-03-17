@@ -3,9 +3,9 @@
 <head>
   {% include head.html %}
 </head>
-<body>
+<body class="app-shell page-{{ page.layout | default: 'default' }}">
   {% include topbar.html %}
-  <main>{{ content }}</main>
+  <main class="app-main">{{ content }}</main>
   {% include footer.html %}
 </body>
 </html>

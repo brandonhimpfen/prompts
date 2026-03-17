@@ -1,21 +1,37 @@
-<header class="topbar">
-  <div class="container topbar__inner">
-    <a class="brand" href="{{ '/' | relative_url }}" aria-label="prompts home">
-      <span class="brand__mark" aria-hidden="true"></span>
-      <span class="brand__word">prompts</span>
-      <span class="brand__by">by Brandon Himpfen</span>
-    </a>
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg app-navbar">
+    <div class="container-xxl align-items-center gap-3">
+      <a class="navbar-brand brand-mark" href="{{ '/' | relative_url }}" aria-label="Prompts home">
+        <span class="brand-icon">P</span>
+        <span>
+          <span class="brand-title">prompts</span>
+          <span class="brand-subtitle">by Brandon Himpfen</span>
+        </span>
+      </a>
 
-    <div class="topbar__search">
-      <span class="icon" aria-hidden="true">⌕</span>
-      <input id="globalSearch" type="search" placeholder="Search prompts (email, rewrite, study, planning…)" />
-      <button id="clearGlobalSearch" class="clear" aria-label="Clear">×</button>
+      <div class="app-search-wrap order-lg-2 flex-grow-1">
+        <form class="app-search" id="globalSearchForm" role="search" action="{{ '/categories/' | relative_url }}">
+          <i class="bi bi-search"></i>
+          <input id="globalSearch" name="q" type="search" placeholder="Search prompts, categories, formats, and tasks" autocomplete="off">
+          <button class="search-clear" id="clearGlobalSearch" type="button" aria-label="Clear search">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </form>
+        <div id="globalSearchResults" class="search-results"></div>
+      </div>
+
+      <button class="navbar-toggler order-lg-3" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse order-lg-4 justify-content-end" id="mainNav">
+        <ul class="navbar-nav align-items-lg-center ms-auto mb-2 mb-lg-0 gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="{{ '/' | relative_url }}">Library</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ '/categories/' | relative_url }}">Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ '/#featured-prompts' | relative_url }}">Featured</a></li>
+          <li class="nav-item"><a class="btn btn-app-primary nav-cta" href="{{ '/builder/' | relative_url }}">Open Builder</a></li>
+        </ul>
+      </div>
     </div>
-
-    <nav class="nav">
-      <a class="nav__link" href="{{ '/categories/' | relative_url }}">Categories</a>
-      <a class="nav__link" href="{{ '/#featured' | relative_url }}">Featured</a>
-      <a class="nav__cta" href="{{ '/builder/' | relative_url }}">Builder</a>
-    </nav>
-  </div>
+  </nav>
 </header>
